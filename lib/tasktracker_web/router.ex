@@ -20,6 +20,7 @@ defmodule TasktrackerWeb.Router do
     # get "/user/:id", UserController, :id
     resources "/users", UserController
     resources "/tasks", TaskController
+    resources "/assignments", AssignmentController
   end
 
   # Other scopes may use custom stacks.

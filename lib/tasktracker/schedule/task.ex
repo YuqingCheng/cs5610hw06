@@ -7,6 +7,7 @@ defmodule Tasktracker.Schedule.Task do
   schema "tasks" do
     field :description, :string
     field :title, :string
+    many_to_many :users, Tasktracker.Accounts.User, join_through: Tasktracker.Schedule.Assignment
 
     timestamps()
   end

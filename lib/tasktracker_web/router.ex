@@ -27,7 +27,7 @@ defmodule TasktrackerWeb.Router do
     post "/assignments", AssignmentController, :create
     put "/assignments", AssignmentController, :update
     
-    delete "/assignments", AssignmentController, :delete
+    delete "/assignments/:id", AssignmentController, :delete
 
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete

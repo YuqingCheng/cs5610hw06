@@ -29,7 +29,9 @@
       <td><%= assignment.time %></td>
       <td>
         <span><%= link "Edit", to: assignment_path(@conn, :edit, assignment, task_id: @task.id) %></span>
-        <span><%= link "Delete", to: assignment_path(@conn, :delete) %></span>
+      </td>
+      <td>
+        <span><%= link "Unassign", to: assignment_path(@conn, :delete, assignment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
       
     </tr>
@@ -37,7 +39,9 @@
   </tbody>
 </table>
 
-<span><%= link "Edit", to: task_path(@conn, :edit, @task) %></span>
-<span><%= link "Assign", to: assignment_path(@conn, :new, @task.id) %></span>
-<span><%= link "Mark Complete", to: task_path(@conn, :delete, @task.id) %></span>
+<%= link "Edit", to: task_path(@conn, :edit, @task) %>
+
+<%= link "Assign", to: assignment_path(@conn, :new, @task.id) %>
+
+<span><%= link "Complete", to: task_path(@conn, :delete, @task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
 <span><%= link "Back", to: task_path(@conn, :index) %></span>

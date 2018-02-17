@@ -2,11 +2,13 @@ defmodule TasktrackerWeb.AssignmentController do
   use TasktrackerWeb, :controller
 
   alias Tasktracker.Schedule
+  alias Tasktracker.Accounts
   alias Tasktracker.Schedule.Assignment
 
   def new(conn, %{"task_id" => task_id}) do
     changeset = Schedule.change_assignment(%Assignment{})
-    render(conn, "new.html", task_id: task_id, changeset: changeset)
+    users = Accounts.list_users
+    render(conn, "new.html", task_id: task_id, users: users, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id, "task_id" => task_id}) do

@@ -28,12 +28,11 @@
       <td><%= assignment.user.name %></td>
       <td><%= assignment.time %></td>
       <td>
-        <span><%= link "Edit", to: assignment_path(@conn, :edit, assignment, task_id: @task.id) %></span>
+        <span><%= link "Edit Time", to: assignment_path(@conn, :edit, assignment, task_id: @task.id) %></span>
       </td>
       <td>
         <span><%= link "Unassign", to: assignment_path(@conn, :delete, assignment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
-      
     </tr>
 <% end %>
   </tbody>

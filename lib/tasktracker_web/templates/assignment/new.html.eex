@@ -7,4 +7,22 @@
   <%= submit "Assign Task" %>
 <% end %>
 
+<table class="table">
+  <thead>
+    <tr>Users</tr>
+    <tr>
+      <td>Id</td>
+      <td>Name</td>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
 <span><%= link "Back", to: task_path(@conn, :show, @task_id) %></span>

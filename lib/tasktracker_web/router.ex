@@ -22,8 +22,11 @@ defmodule TasktrackerWeb.Router do
     resources "/users", UserController
     resources "/tasks", TaskController
 
-    get "/assignments/new/:task_id", AssignmentController, :new
+    get "/assignments/:task_id/new", AssignmentController, :new
+    get "/assignments/:id/edit", AssignmentController, :edit
     post "/assignments", AssignmentController, :create
+    put "/assignments", AssignmentController, :update
+    
     delete "/assignments", AssignmentController, :delete
 
     post "/session", SessionController, :create

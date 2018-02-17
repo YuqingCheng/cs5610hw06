@@ -1,5 +1,11 @@
 <h2>Edit Assignment</h2>
 
-<%= render "form.html", Map.put(assigns, :action, assignment_path(@conn, :update, @assignment)) %>
+<%= form_for @changeset, assignment_path(@conn, :update), fn f -> %>
+  <label>Time: <%= text_input f, :time %></label>
+  <%= hidden_input f, :user_id %>
+  <%= hidden_input f, :task_id %>
+  <%= hidden_input f, :id %>
+  <%= submit "Update Assignment" %>
+<% end %>
 
-<span><%= link "Back", to: assignment_path(@conn, :index) %></span>
+<span><%= link "Back", to: task_path(@conn, :show, @task_id) %></span>

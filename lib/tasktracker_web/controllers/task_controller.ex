@@ -28,7 +28,8 @@ defmodule TasktrackerWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Schedule.get_task!(id)
-    render(conn, "show.html", task: task)
+    assignments = Schedule.list_assignments_by_task(id)
+    render(conn, "show.html", task: task, assignments: assignments)
   end
 
   def edit(conn, %{"id" => id}) do

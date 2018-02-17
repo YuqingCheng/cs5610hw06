@@ -133,6 +133,13 @@ defmodule Tasktracker.Schedule do
   """
   def get_assignment!(id), do: Repo.get!(Assignment, id)
 
+  def list_assignments_by_task(task_id) do
+    query = from a in Assignment,
+            where: a.task_id == ^task_id
+    Repo.all(query)
+       |> Enum.map(fn assignment -> Repo.preload(assignment, :user) end)
+  end
+
   @doc """
   Creates a assignment.
 

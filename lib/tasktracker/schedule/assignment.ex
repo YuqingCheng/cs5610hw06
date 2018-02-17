@@ -6,8 +6,8 @@ defmodule Tasktracker.Schedule.Assignment do
 
   schema "assignments" do
     field :time, :integer
-    belongs_to :user_id, Tasktracker.Accounts.User
-    belongs_to :task_id, Tasktracker.Schedule.Task
+    belongs_to :user, Tasktracker.Accounts.User
+    belongs_to :task, Tasktracker.Schedule.Task
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule Tasktracker.Schedule.Assignment do
   @doc false
   def changeset(%Assignment{} = assignment, attrs) do
     assignment
-    |> cast(attrs, [:time])
-    |> validate_required([:time])
+    |> cast(attrs, [:time, :user_id, :task_id])
+    |> validate_required([:time, :user_id, :task_id])
   end
 end

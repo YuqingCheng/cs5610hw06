@@ -1,5 +1,5 @@
 <h2>New Assignment</h2>
 
-<%= render "form.html", Map.put(assigns, :action, assignment_path(@conn, :create)) %>
+<%= render "form.html", Map.put(assigns, :action, assignment_path(@conn, :create, @assignment)) %>
 
-<span><%= link "Back", to: assignment_path(@conn, :index) %></span>
+<span><%= link "Back", to: task_path(@conn, :show, @task_id) %></span>

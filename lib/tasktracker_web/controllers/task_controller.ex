@@ -3,6 +3,7 @@ defmodule TasktrackerWeb.TaskController do
 
   alias Tasktracker.Schedule
   alias Tasktracker.Schedule.Task
+  alias Tasktracker.Schedule.Assignment
 
   def index(conn, _params) do
     tasks = Schedule.list_tasks()

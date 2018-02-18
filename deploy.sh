@@ -31,7 +31,7 @@ REL_TAR=~/src/tasktracker/_build/prod/rel/tasktracker/releases/0.0.1/tasktracker
 (cd ~/www/tasktracker && tar xzvf $REL_TAR)
 
 crontab - <<CRONTAB
-@reboot bash /home/memory/src/memory/start.sh
+@reboot bash /home/tasks1/src/tasktracker/start.sh
 CRONTAB
 
 #. start.sh

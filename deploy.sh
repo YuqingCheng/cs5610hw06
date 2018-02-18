@@ -1,3 +1,4 @@
+# deploy scripts attribution goes to Nat's deployment script for memory game
 #!/bin/bash
 
 export PORT=5101

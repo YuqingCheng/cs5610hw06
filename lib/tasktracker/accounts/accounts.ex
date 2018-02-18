@@ -37,6 +37,11 @@ defmodule Tasktracker.Accounts do
   """
   def get_user!(id), do: Repo.get(User, id)
 
+  def get_user_with_tasks(id) do
+    Repo.get(User, id)
+     |> Repo.preload(:tasks)
+  end
+
   def get_user_by_email(email) do
     Repo.get_by(User, email: email)
   end

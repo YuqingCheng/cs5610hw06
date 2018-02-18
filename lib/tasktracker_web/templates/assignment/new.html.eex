@@ -1,7 +1,7 @@
 <h2>New Assignment</h2>
 
 <%= form_for @changeset, assignment_path(@conn, :create), fn f -> %>
-  <label>Time: <%= text_input f, :time %></label>
+  <label>Time: <%= number_input f, :time %></label>
   <label>User: <%= text_input f, :user_id %></label>
   <%= hidden_input f, :task_id, value: @task_id %>
   <%= submit "Assign Task" %>

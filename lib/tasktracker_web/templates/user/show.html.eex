@@ -1,4 +1,4 @@
-<h2>Show User</h2>
+<h2>My Info</h2>
 
 <ul>
 
@@ -14,5 +14,33 @@
 
 </ul>
 
+<%= if !Enum.empty?(@user.tasks) do %>
+  <h3>Tasks to do</h3>
+  <table class="table">
+    <thead>
+      
+      <tr>
+        <td>Title</td>
+        <td>Description</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for task <- @user.tasks do %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= link "details", to: task_path(@conn, :show, task.id) %></td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div>
+
 <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<span><%= link "Back", to: task_path(@conn, :index) %></span>
+</div>
+
+

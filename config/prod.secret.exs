@@ -9,6 +9,7 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :tasktracker, TasktrackerWeb.Endpoint,
+  url: [host: "localhost", port: 5101],
   secret_key_base: "Lu/mzdJKbOQKp9WUFdL/Bq9m5S3s6HTvMOAqWfQOdymXc61rroE6Lrws3ucYoEX1"
 
 # Configure your database

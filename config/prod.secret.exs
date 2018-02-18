@@ -16,5 +16,5 @@ config :tasktracker, Tasktracker.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "tasktracker_prod",
+  database: "tasktracker_dev",
   pool_size: 15

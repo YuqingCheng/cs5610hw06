@@ -10,9 +10,9 @@
  * For test purpose, routes for editing users and deleting users are not deactivated, everyone could edit user information by going to particular links, but there's no such button in app navigation. These features should be excluded for admins only in future updates.
  
 ## Many to Many relation between users and tasks through assignments
-[User] <-> [Assignment] <-> [Task]
-  id   <--   user_id
-             task_id    -->  id
+[User] <-> [Assignment] <-> [Task]\n
+  id   <--   user_id\n
+             task_id    -->  id\n
  
 ## Deployment
 To start your Phoenix server:

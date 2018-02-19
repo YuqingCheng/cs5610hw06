@@ -1,5 +1,15 @@
 # Tasktracker
 
+## Features of App
+ * The app is designed for the scenario where multiple users collaborately manage task by assigning task to users and tracking time for each assignment
+ * Users register and log in by email
+ * Every user can create, edit task info, and mark complete a task
+ * Every user can assign a user (including self) to a task, and add time spent for a specific assignment
+ * Every user can unassign a user from a task
+ * Navigation in webpage could cover all features for app purpose (task management)
+ * For test purpose, routes for editing users and deleting users are not deactivated, everyone could edit user information by going to particular links, but there's no such button in app navigation. These features should be excluded for admins only in future updates.
+ 
+## Deployment
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

@@ -7,7 +7,7 @@
  * Every user can assign a task to multiple users (including self), and add time spent for a specific assignment
  * Every user can unassign users from a task
  * Navigation in webpage could cover all features for app purpose (task management)
- * For test purpose, routes for editing users and deleting users are not deactivated, everyone could edit user information by going to particular links, but there's no such button in app navigation. These features should be excluded for admins only in future updates.
+ * For test purpose, routes for editing users and deleting users are not deactivated, everyone could edit user information by going to particular links, but there's no such button in app navigation. These features should be excluded for admins only in future updates. Use http://tasks1.yuqingc.com/users to see list of users.
  
 ## Many to Many relation between users and tasks through assignments
 *       [User] <-> [Assignment] <-> [Task]

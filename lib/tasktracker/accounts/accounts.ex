@@ -35,10 +35,14 @@ defmodule Tasktracker.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get(User, id)
-
-  def get_user_with_tasks(id) do
+  def get_user!(id) do
     Repo.get(User, id)
+    |> Repo.preload(:manager)
+  end
+
+  def get_user_in_details(id) do
+    Repo.get(User, id)
+     |> Repo.preload(:manager)
      |> Repo.preload(:tasks)
   end
 

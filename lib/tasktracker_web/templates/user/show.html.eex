@@ -1,4 +1,4 @@
-<h2>My Info</h2>
+<h2>User Info</h2>
 
 <ul>
 
@@ -11,6 +11,12 @@
     <strong>Name:</strong>
     <%= @user.name %>
   </li>
+  <%= if @user.manager do %>
+    <li>
+      <strong>Manager:</strong>
+      <%= @user.manager.name %>
+    </li>
+  <% end %>
 
 </ul>
 
@@ -39,7 +45,10 @@
 
 <div>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<%= if @current_user && (@current_user.admin || @current_user.id == @user.id) do %>
+  <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<% end %>
+
 <span><%= link "Back", to: task_path(@conn, :index) %></span>
 </div>
 

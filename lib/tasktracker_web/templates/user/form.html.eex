@@ -17,6 +17,14 @@
     <%= error_tag f, :name %>
   </div>
 
+  <%= if @current_user.admin && @current_user.id != @user.id do %>
+    <div class="form-group">
+      <%= label f, :manager_id, class: "control-label" %>
+      <%= number_input f, :manager_id, class: "form-control" %>
+      <%= error_tag f, :manager_id %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

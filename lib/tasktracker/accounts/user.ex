@@ -6,6 +6,8 @@ defmodule Tasktracker.Accounts.User do
   schema "users" do
     field :email, :string
     field :name, :string
+    field :admin, :boolean
+    belongs_to :manager, Tasktracker.Accounts.User
     many_to_many :tasks, Tasktracker.Schedule.Task, join_through: Tasktracker.Schedule.Assignment
     timestamps()
   end
@@ -13,7 +15,7 @@ defmodule Tasktracker.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :name])
-    |> validate_required([:email, :name])
+    |> cast(attrs, [:email, :name, :manager_id])
+    |> validate_required([:email, :name, :manager_id])
   end
 end

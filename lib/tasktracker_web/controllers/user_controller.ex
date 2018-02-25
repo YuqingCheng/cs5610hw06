@@ -26,7 +26,7 @@ defmodule TasktrackerWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Accounts.get_user_with_tasks(id)
+    user = Accounts.get_user_in_details(id)
     render(conn, "show.html", user: user)
   end
 

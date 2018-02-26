@@ -21,6 +21,12 @@ defmodule Tasktracker.Schedule do
     Repo.all(Task)
   end
 
+  def list_tasks_by_owner(id) do
+    query = from a in Task,
+        where: a.owner_id == ^id
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single task.
 
@@ -132,6 +138,14 @@ defmodule Tasktracker.Schedule do
 
   """
   def get_assignment!(id), do: Repo.get!(Assignment, id)
+
+  def get_assignment_by_task_and_user(task_id, user_id) do
+    query = from a in Assignment,
+            where: a.task_id == ^task_id and a.user_id == ^user_id
+    Repo.all(query) 
+        |> List.first 
+        |> Repo.preload(:user)
+  end
 
   def list_assignments_by_task(task_id) do
     query = from a in Assignment,

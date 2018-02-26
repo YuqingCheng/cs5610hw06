@@ -11,8 +11,13 @@ defmodule TasktrackerWeb.TaskController do
   end
 
   def new(conn, _params) do
-    changeset = Schedule.change_task(%Task{})
-    render(conn, "new.html", changeset: changeset)
+    user_id = get_session(conn, :user_id)
+    if user_id do
+      changeset = Schedule.change_task(%Task{})
+      render(conn, "new.html", changeset: changeset)
+    else
+      redirect(conn, to: page_path(conn, :index))
+    end
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -28,14 +33,30 @@ defmodule TasktrackerWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Schedule.get_task!(id)
-    assignments = Schedule.list_assignments_by_task(id)
-    render(conn, "show.html", task: task, assignments: assignments)
+    user_id = get_session(conn, :user_id)
+    if user_id do
+      if user_id == task.owner_id do
+        assignments = Schedule.list_assignments_by_task(id)
+        render(conn, "show.html", task: task, assignments: assignments, owned: true)  
+      end   
+      assignment = Schedule.get_assignment_by_task_and_user(task.id, user_id)
+      if assignment do
+        render(conn, "show.html", task: task, assignments: [assignment], owned: false)
+      end
+    end
+    redirect(conn, to: page_path(conn, :index))
+    
   end
 
   def edit(conn, %{"id" => id}) do
+    user_id = get_session(conn, :user_id)
     task = Schedule.get_task!(id)
-    changeset = Schedule.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset)
+    if user_id == task.owner_id do
+      changeset = Schedule.change_task(task)
+      render(conn, "edit.html", task: task, changeset: changeset)
+    else
+      redirect(conn, to: page_path(conn, :index))
+    end 
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do

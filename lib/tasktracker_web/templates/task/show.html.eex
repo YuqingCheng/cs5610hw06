@@ -42,15 +42,17 @@
 <% end %>
 
 <div class="row">
-<div class="col-md-2">
-<%= link "Edit Task", to: task_path(@conn, :edit, @task) %>
-</div>
-<div class="col-md-2">
-<%= link "Assign", to: assignment_path(@conn, :new, @task.id) %>
-</div>
-<div class="col-md-2">
-<span><%= link "Mark Complete", to: task_path(@conn, :delete, @task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-</div>
+<%= if @owned do %>
+  <div class="col-md-2">
+  <%= link "Edit Task", to: task_path(@conn, :edit, @task) %>
+  </div>
+  <div class="col-md-2">
+  <%= link "Assign", to: assignment_path(@conn, :new, @task.id) %>
+  </div>
+  <div class="col-md-2">
+  <span><%= link "Mark Complete", to: task_path(@conn, :delete, @task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+  </div>
+<% end %>
 <div class="col-md-3">
 <span><%= link "Back", to: task_path(@conn, :index) %></span>
 </div>

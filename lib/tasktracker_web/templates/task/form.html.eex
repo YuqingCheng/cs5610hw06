@@ -17,6 +17,8 @@
     <%= error_tag f, :description %>
   </div>
 
+  <%= hidden_input f, :owner_id, value: @current_user.id %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

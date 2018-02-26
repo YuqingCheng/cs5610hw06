@@ -43,6 +43,7 @@ defmodule Tasktracker.Accounts do
   def get_user_in_details(id) do
     Repo.get(User, id)
      |> Repo.preload(:manager)
+     |> Repo.preload(:underlings)
      |> Repo.preload(:tasks)
   end
 

@@ -43,6 +43,28 @@
   </table>
 <% end %>
 
+<%= if !Enum.empty?(@user.underlings) do %>
+  <h3><%= @user.name %>'s underlings</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for underling <- @user.underlings do %>
+      <tr>
+        <td><%= underling.id %></td>
+        <td><%= underling.name %></td>
+        <td><%= link "details", to: task_path(@conn, :show, underling.id) %></td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <div>
 
 <%= if @current_user && (@current_user.admin || @current_user.id == @user.id) do %>

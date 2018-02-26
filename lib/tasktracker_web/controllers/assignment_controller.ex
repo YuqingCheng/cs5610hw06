@@ -7,8 +7,15 @@ defmodule TasktrackerWeb.AssignmentController do
 
   def new(conn, %{"task_id" => task_id}) do
     changeset = Schedule.change_assignment(%Assignment{})
-    users = Accounts.list_users
-    render(conn, "new.html", task_id: task_id, users: users, changeset: changeset)
+    user_id = get_session(conn, :user_id)
+    task = Schedule.get_task! task_id
+    if user_id && user_id == task.owner_id do
+      user = Accounts.get_user_in_details(user_id)
+      users = user.underlings
+      render(conn, "new.html", task_id: task_id, users: users, changeset: changeset)
+    else
+      redirect(conn, to: page_path(conn, :index))
+    end
   end
 
   def edit(conn, %{"id" => id, "task_id" => task_id}) do

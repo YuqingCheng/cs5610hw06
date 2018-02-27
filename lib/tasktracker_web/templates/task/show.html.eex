@@ -32,8 +32,8 @@
           <ul>
           <%= for timeblock <- assignment.timeblocks do %>
             <li>
-              <%= timeblock.start %> |
-              <%= timeblock.end %>
+              <%= timeblock.start |> NaiveDateTime.truncate :second %> ->
+              <%= timeblock.end |> NaiveDateTime.truncate :second %>
             </li>
           <% end %>
           </ul>

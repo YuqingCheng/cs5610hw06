@@ -16,7 +16,7 @@ defmodule Tasktracker.Schedule.Assignment do
   @doc false
   def changeset(%Assignment{} = assignment, attrs) do
     assignment
-    |> cast(attrs, [:time, :user_id, :task_id])
-    |> validate_required([:time, :user_id, :task_id])
+    |> cast(attrs, [:user_id, :task_id])
+    |> validate_required([:user_id, :task_id])
   end
 end

@@ -14,12 +14,83 @@
 import "phoenix_html";
 import $ from "jquery";
 
+function update_buttons() {
+  $('.timeblock-button').each( (_, bb) => {
+    let start_time = $(bb).data('start-time');
+    if (start_time) {
+      $(bb).text("Stop Working");
+    } else {
+      $(bb).text("Start Working");
+    }
+  });
+}
+
+function set_button(assignment_id, value) {
+  $('.timeblock-button').each( (_, bb) => {
+    if (assignment_id == $(bb).data('assignment-id')) {
+      $(bb).data('start-time', value);
+    }
+  });
+  update_buttons();
+}
+
+function start_task(assignment_id) {
+  let text = JSON.stringify({
+    action: {
+      assignment_id: assignment_id,
+      flag: 'start',
+    }
+  });
+
+  $.ajax(timeblock_path, {
+    method: "post",
+    dataType: "json",
+    contentType: "application/json; charset=UTF-8",
+    data: text,
+    success: (resp) => { set_button(assignment_id, resp.data); },
+  });
+}
+
+function stop_task(assignment_id) {
+  let text = JSON.stringify({
+    action: {
+      assignment_id: assignment_id,
+      flag: 'stop',
+    }
+  });
+  $.ajax(timeblock_path, {
+    method: "post",
+    dataType: "json",
+    contentType: "application/json; charset=UTF-8",
+    data: text,
+    success: () => { 
+      set_button(assignment_id, null);
+    },
+  });
+}
+
+function button_click(e) {
+  let btn = $(e.target);
+  let started = btn.data('start-time');
+  let assignment_id = btn.data('assignment-id');
+
+  if (started) {
+    stop_task(assignment_id);
+    location.reload();
+  } else {
+    start_task(assignment_id);
+    
+  }
+}
+
 function init_timeblock() {
   if(!$('.timeblock-button')) {
     return;
   }
   $('.timeblock-button').click(button_click);
 }
+
+$(init_timeblock);
 
 // Import local files
 //

@@ -25,6 +25,7 @@ defmodule Tasktracker.Schedule do
     query = from a in Task,
         where: a.owner_id == ^id
     Repo.all(query)
+        |> Enum.map(fn task -> Repo.preload(task, :timeblocks) end)
   end
 
   @doc """
@@ -137,7 +138,10 @@ defmodule Tasktracker.Schedule do
       ** (Ecto.NoResultsError)
 
   """
-  def get_assignment!(id), do: Repo.get!(Assignment, id)
+  def get_assignment!(id) do
+    Repo.get!(Assignment, id)
+        |> Repo.preload(:timeblocks)
+  end
 
   def get_assignment_by_task_and_user(task_id, user_id) do
     query = from a in Assignment,
@@ -145,6 +149,7 @@ defmodule Tasktracker.Schedule do
     Repo.all(query) 
         |> List.first 
         |> Repo.preload(:user)
+        |> Repo.preload(:timeblocks)
   end
 
   def list_assignments_by_task(task_id) do
@@ -320,13 +325,16 @@ defmodule Tasktracker.Schedule do
 
   def start_task(assignment_id) do
       {_, info} = Agent.start(fn -> curr_time end, name: :"#{assignment_id}")
-      Agent.get(:"#{assignment_id}", &(&1))
+      timeblock = %{id: -1, start: Agent.get(:"#{assignment_id}", &(&1)), end: curr_time}
+      {:ok, timeblock}
   end
 
   def stop_task(assignment_id) do
       start = Agent.get(:"#{assignment_id}", &(&1))
       Agent.stop(:"#{assignment_id}", :normal, :infinity)
-      {start, curr_time}
+      stop = curr_time
+      timeblock = %{assignment_id: assignment_id, start: start, end: stop}
+      create_timeblock(timeblock)
   end
 
   def curr_time do

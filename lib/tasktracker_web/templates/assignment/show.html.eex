@@ -7,11 +7,15 @@
  <ul>
 <%= for timeblock <- @assignment.timeblocks do %>
   <li>
-    <%= timeblock.start %> |
-    <%= timeblock.end %>
+    <%= timeblock.start |> NaiveDateTime.truncate :second %> ->
+    <%= timeblock.end |> NaiveDateTime.truncate :second %>
   </li>
 <% end %>
 </ul>
-
+<button class="timeblock-button btn btn-default"
+        data-assignment-id="<%= @assignment.id %>"
+        data-start-time="<%= nil %>">
+  Start Working
+</button>
 <span><%= link "Edit", to: assignment_path(@conn, :edit, @assignment) %></span>
-<span><%= link "Back", to: assignment_path(@conn, :index) %></span>
+<span><%= link "Back", to: task_path(@conn, :show, @assignment.task_id) %></span>

@@ -11,7 +11,15 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+import "phoenix_html";
+import $ from "jquery";
+
+function init_timeblock() {
+  if(!$('.timeblock-button')) {
+    return;
+  }
+  $('.timeblock-button').click(button_click);
+}
 
 // Import local files
 //

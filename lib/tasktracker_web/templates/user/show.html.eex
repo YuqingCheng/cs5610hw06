@@ -58,7 +58,7 @@
       <tr>
         <td><%= underling.id %></td>
         <td><%= underling.name %></td>
-        <td><%= link "details", to: task_path(@conn, :show, underling.id) %></td>
+        <td><%= link "details", to: user_path(@conn, :show, underling.id) %></td>
       </tr>
   <% end %>
     </tbody>

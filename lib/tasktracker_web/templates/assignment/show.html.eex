@@ -1,12 +1,16 @@
-<h2>Show Assignment</h2>
+<script>
+  window.timeblock_path = "<%= timeblock_path(@conn, :index) %>";
+  window.assignment_id = "<%= @assignment.id %>";
+</script>
+<h2>Working Times</h2>
 
-<ul>
-
+ <ul>
+<%= for timeblock <- @assignment.timeblocks do %>
   <li>
-    <strong>Time:</strong>
-    <%= @assignment.time %>
+    <%= timeblock.start %> |
+    <%= timeblock.end %>
   </li>
-
+<% end %>
 </ul>
 
 <span><%= link "Edit", to: assignment_path(@conn, :edit, @assignment) %></span>

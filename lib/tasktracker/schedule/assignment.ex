@@ -8,6 +8,7 @@ defmodule Tasktracker.Schedule.Assignment do
     field :time, :integer
     belongs_to :user, Tasktracker.Accounts.User
     belongs_to :task, Tasktracker.Schedule.Task
+    has_many :timeblocks, Tasktracker.Schedule.Timeblock, foreign_key: :assignment_id
 
     timestamps()
   end

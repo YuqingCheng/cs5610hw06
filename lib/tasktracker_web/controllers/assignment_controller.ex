@@ -5,6 +5,11 @@ defmodule TasktrackerWeb.AssignmentController do
   alias Tasktracker.Accounts
   alias Tasktracker.Schedule.Assignment
 
+  def show(conn, %{"id" => id}) do
+    assignment = Schedule.get_assignment!(id)
+    render(conn, "show.html", assignment: assignment)
+  end
+
   def new(conn, %{"task_id" => task_id}) do
     changeset = Schedule.change_assignment(%Assignment{})
     user_id = get_session(conn, :user_id)

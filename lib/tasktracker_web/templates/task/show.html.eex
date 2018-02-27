@@ -19,24 +19,33 @@
     <thead>
       <tr>
         <td>User</td>
-        <td>Time</td>
+        <td>Time Blocks</td>
         <td></td>
         <td></td>
       </tr>
     </thead>
     <tbody>
-  <%= for assignment <- @assignments do %>
+    <%= for assignment <- @assignments do %>
       <tr>
         <td><%= assignment.user.name %></td>
-        <td><%= assignment.time %></td>
         <td>
-          <span><%= link "Edit Time", to: assignment_path(@conn, :edit, assignment, task_id: @task.id) %></span>
+          <ul>
+          <%= for timeblock <- assignment.timeblocks do %>
+            <li>
+              <%= timeblock.start %> |
+              <%= timeblock.end %>
+            </li>
+          <% end %>
+          </ul>
+        </td>
+        <td>
+          <span><%= link "Work Now", to: assignment_path(@conn, :show, assignment.id) %></span>
         </td>
         <td>
           <span><%= link "Unassign", to: assignment_path(@conn, :delete, assignment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
         </td>
       </tr>
-  <% end %>
+    <% end %>
     </tbody>
   </table>
 <% end %>

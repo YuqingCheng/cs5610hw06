@@ -22,6 +22,8 @@ defmodule TasktrackerWeb.Router do
     resources "/users", UserController
     resources "/tasks", TaskController
 
+    get "/assignments", AssignmentController, :index
+    get "/assignments/:id", AssignmentController, :show
     get "/assignments/:task_id/new", AssignmentController, :new
     get "/assignments/:id/edit", AssignmentController, :edit
     post "/assignments", AssignmentController, :create
@@ -31,6 +33,11 @@ defmodule TasktrackerWeb.Router do
 
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete
+  end
+
+  scope "/api/v1", TasktrackerWeb do
+    pipe_through :api
+    resources "/timeblock", TimeblockController, except: [:new, :edit]
   end
 
   def get_current_user(conn, _params) do

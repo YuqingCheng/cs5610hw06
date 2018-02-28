@@ -21,7 +21,6 @@
         <td>User</td>
         <td>Time Blocks</td>
         <td></td>
-        <td></td>
       </tr>
     </thead>
     <tbody>
@@ -38,12 +37,15 @@
           <% end %>
           </ul>
         </td>
-        <td>
-          <span><%= link "Work Now", to: assignment_path(@conn, :show, assignment.id) %></span>
-        </td>
-        <td>
-          <span><%= link "Unassign", to: assignment_path(@conn, :delete, assignment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-        </td>
+        <%= if @owned do %>
+          <td>
+            <span><%= link "Unassign", to: assignment_path(@conn, :delete, assignment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        <% else %>
+          <td>
+            <span><%= link "Work Now", to: assignment_path(@conn, :show, assignment.id) %></span>
+          </td>
+        <% end %>
       </tr>
     <% end %>
     </tbody>

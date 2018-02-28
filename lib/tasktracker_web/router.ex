@@ -28,8 +28,15 @@ defmodule TasktrackerWeb.Router do
     get "/assignments/:id/edit", AssignmentController, :edit
     post "/assignments", AssignmentController, :create
     put "/assignments", AssignmentController, :update
-    
     delete "/assignments/:id", AssignmentController, :delete
+
+    get "/assignments/timeblock/:id", AssignmentController, :delete_timeblock
+    get "/assignments/:assignment_id/new_timeblock", AssignmentController, :new_timeblock
+    get "/assignments/:id/edit_timeblock", AssignmentController, :edit_timeblock
+    post "/assignments/timeblock", AssignmentController, :create_timeblock
+    put "/assignments/timeblock", AssignmentController, :update_timeblock
+    delete "/assignments/timeblock/:id", AssignmentController, :delete_timeblock
+    
 
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete

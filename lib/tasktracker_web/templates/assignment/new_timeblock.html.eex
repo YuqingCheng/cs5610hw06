@@ -1,0 +1,24 @@
+<h2>New Timeblock</h2>
+
+<%= form_for @changeset, assignment_path(@conn, :create_timeblock), fn f -> %>
+  <h3>From</h3>
+  YYYY: <%= number_input f, :from_year, class: "form-control" %>
+  MM: <%= number_input f, :from_month, class: "form-control" %>
+  DD: <%= number_input f, :from_day, class: "form-control" %>
+  Hour: <%= number_input f, :from_hour, class: "form-control" %>
+  Min: <%= number_input f, :from_minute, class: "form-control" %>
+  Second: <%= number_input f, :from_second, class: "form-control" %>
+
+  <h3>To</h3>
+  YYYY: <%= number_input f, :to_year, class: "form-control" %>
+  MM: <%= number_input f, :to_month, class: "form-control" %>
+  DD: <%= number_input f, :to_day, class: "form-control" %>
+  Hour: <%= number_input f, :to_hour, class: "form-control" %>
+  Min: <%= number_input f, :to_minute, class: "form-control" %>
+  Second: <%= number_input f, :to_second, class: "form-control" %>
+
+  <%= hidden_input f, :assignment_id, value: @assignment_id %>
+  <%= submit "Add timeblock" %>
+<% end %>
+
+<span><%= link "Back", to: assignment_path(@conn, :show, @assignment_id) %></span>

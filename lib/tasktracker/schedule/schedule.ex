@@ -25,7 +25,6 @@ defmodule Tasktracker.Schedule do
     query = from a in Task,
         where: a.owner_id == ^id
     Repo.all(query)
-        |> Enum.map(fn task -> Repo.preload(task, :timeblocks) end)
   end
 
   @doc """

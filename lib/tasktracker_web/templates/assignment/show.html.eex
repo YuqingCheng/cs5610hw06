@@ -9,6 +9,8 @@
   <li>
     <%= timeblock.start |> NaiveDateTime.truncate :second %> ->
     <%= timeblock.end |> NaiveDateTime.truncate :second %>
+    <span><%= link "Edit", to: assignment_path(@conn, :edit_timeblock, timeblock) %></span>
+    <span><%= link "Delete", to: assignment_path(@conn, :delete_timeblock, timeblock), method: :delete, data: [confirm: "Are you sure?"] %></span>
   </li>
 <% end %>
 </ul>
@@ -17,5 +19,5 @@
         data-start-time="<%= nil %>">
   Start Working
 </button>
-<span><%= link "Edit", to: assignment_path(@conn, :edit, @assignment) %></span>
+<span><%= link "Manually Add", to: assignment_path(@conn, :new_timeblock, @assignment.id) %></span>
 <span><%= link "Back", to: task_path(@conn, :show, @assignment.task_id) %></span>

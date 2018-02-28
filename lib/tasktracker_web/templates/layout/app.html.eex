@@ -16,14 +16,16 @@
     <!-- Heading attribution goes to Nat's note on course website-->
       <div class="row">
         <div class="col-md-3">
-          <p>
-            <%= link "Tasks", to: "/tasks" %>
-          </p>
+          <%= if @current_user do %>
+            <p>
+              <%= link "Owned Tasks", to: "/tasks" %>
+            </p>
+          <% end %>
         </div>
         <div class="col-md-3">
           <p>
             <%= if @current_user do %>
-              <%= link "Me", to: "/users/#{@current_user.id}" %>
+              <%= link "Me/My Tasks & underlings", to: "/users/#{@current_user.id}" %>
             <% end %>
           </p>
         </div>

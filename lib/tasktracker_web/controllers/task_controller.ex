@@ -6,8 +6,14 @@ defmodule TasktrackerWeb.TaskController do
   alias Tasktracker.Schedule.Assignment
 
   def index(conn, _params) do
-    tasks = Schedule.list_tasks()
-    render(conn, "index.html", tasks: tasks)
+    user_id = get_session(conn, :user_id)
+    if user_id do
+      tasks = Schedule.list_tasks_by_owner(user_id)
+      render(conn, "index.html", tasks: tasks)
+    else
+      redirect(conn, to: page_path(conn, :index))
+    end
+    
   end
 
   def new(conn, _params) do

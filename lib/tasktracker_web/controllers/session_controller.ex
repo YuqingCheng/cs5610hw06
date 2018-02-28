@@ -10,7 +10,7 @@ defmodule TasktrackerWeb.SessionController do
       conn
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "Welcome, #{user.name}")
-        |> redirect(to: task_path(conn, :index))
+        |> redirect(to: user_path(conn, :show, user.id))
     else
       conn
         |> put_flash(:error, "login failed")

@@ -337,11 +337,13 @@ defmodule Tasktracker.Schedule do
   end
 
   def assignment_started?(assignment_id) do
-      started = Agent.get(:"#{assignment_id}", &(&1))
-      if started do
-        true
-      else
-        false
+      try do
+        if Agent.get(:"#{assignment_id}", &(&1)) do
+            true
+        end
+      catch
+        exit,_ ->
+            false
       end
   end
 

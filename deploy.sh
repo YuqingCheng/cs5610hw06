@@ -3,7 +3,7 @@
 
 export PORT=5101
 export MIX_ENV=prod
-export GIT_PATH=/home/tasks1/src/tasktracker
+export GIT_PATH=/home/tasks2/src/tasktracker
 
 PWD=`pwd`
 if [ $PWD != $GIT_PATH ]; then
@@ -32,7 +32,7 @@ REL_TAR=~/src/tasktracker/_build/prod/rel/tasktracker/releases/0.0.1/tasktracker
 (cd ~/www/tasktracker && tar xzvf $REL_TAR)
 
 crontab - <<CRONTAB
-@reboot bash /home/tasks1/src/tasktracker/start.sh
+@reboot bash /home/tasks2/src/tasktracker/start.sh
 CRONTAB
 
 #. start.sh

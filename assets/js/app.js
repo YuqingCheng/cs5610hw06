@@ -16,8 +16,8 @@ import $ from "jquery";
 
 function update_buttons() {
   $('.timeblock-button').each( (_, bb) => {
-    let start_time = $(bb).data('start-time');
-    if (start_time) {
+    let started = $(bb).data('started');
+    if (started) {
       $(bb).text("Stop Working");
     } else {
       $(bb).text("Start Working");
@@ -28,7 +28,7 @@ function update_buttons() {
 function set_button(assignment_id, value) {
   $('.timeblock-button').each( (_, bb) => {
     if (assignment_id == $(bb).data('assignment-id')) {
-      $(bb).data('start-time', value);
+      $(bb).data('started', value);
     }
   });
   update_buttons();
@@ -71,7 +71,7 @@ function stop_task(assignment_id) {
 
 function button_click(e) {
   let btn = $(e.target);
-  let started = btn.data('start-time');
+  let started = btn.data('started');
   let assignment_id = btn.data('assignment-id');
 
   if (started) {
@@ -79,7 +79,6 @@ function button_click(e) {
     location.reload();
   } else {
     start_task(assignment_id);
-    
   }
 }
 
@@ -88,6 +87,7 @@ function init_timeblock() {
     return;
   }
   $('.timeblock-button').click(button_click);
+  update_buttons();
 }
 
 $(init_timeblock);

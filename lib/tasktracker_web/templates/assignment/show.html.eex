@@ -14,9 +14,9 @@
   </li>
 <% end %>
 </ul>
-<button class="timeblock-button btn btn-default"
+<button class="timeblock-button btn btn-success"
         data-assignment-id="<%= @assignment.id %>"
-        data-start-time="<%= nil %>">
+        data-started="<%= @started %>">
   Start Working
 </button>
 <span><%= link "Manually Add", to: assignment_path(@conn, :new_timeblock, @assignment.id) %></span>

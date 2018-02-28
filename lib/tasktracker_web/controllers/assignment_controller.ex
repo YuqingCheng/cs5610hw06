@@ -8,7 +8,8 @@ defmodule TasktrackerWeb.AssignmentController do
 
   def show(conn, %{"id" => id}) do
     assignment = Schedule.get_assignment!(id)
-    render(conn, "show.html", assignment: assignment)
+    started = Schedule.assignment_started?(id)
+    render(conn, "show.html", assignment: assignment, started: started)
   end
 
   def new(conn, %{"task_id" => task_id}) do

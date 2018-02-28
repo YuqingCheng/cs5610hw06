@@ -336,6 +336,15 @@ defmodule Tasktracker.Schedule do
       create_timeblock(timeblock)
   end
 
+  def assignment_started?(assignment_id) do
+      started = Agent.get(:"#{assignment_id}", &(&1))
+      if started do
+        true
+      else
+        false
+      end
+  end
+
   def curr_time do
       NaiveDateTime.utc_now |> NaiveDateTime.add(-18000, :second)
   end

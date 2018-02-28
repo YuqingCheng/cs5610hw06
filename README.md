@@ -1,13 +1,15 @@
 # Tasktracker
 
-## Features of App
- * The app is designed for the scenario where multiple users collaborately manage task by assigning task to users and tracking time for each assignment
+## Features & Design choices of App
  * Users register and log in by email
- * Every user can create, edit task info, and mark complete a task
- * Every user can assign a task to multiple users (including self), and add time spent for a specific assignment
- * Every user can unassign users from a task
- * Navigation in webpage could cover all features for app purpose (task management)
- * For test purpose, routes for editing users and deleting users are not deactivated, everyone could edit user information by going to particular links, but there's no such button in app navigation. These features should be excluded for admins only in future updates. Use http://tasks1.yuqingc.com/users to see list of users.
+ * Only admin can assign manager to users, please log in as admin by 'admin@admin.com', and go to 'tasks2.yuqingc.com/users' to see all the users, manager can be assigned by editting user's profile.
+ * Every user can create, thus owns a task, but can only assign it his/her underlings. A task can only be owned by one user, thus ownership between user and task is one-to-many. User can see his/her owned tasks by clicking 'owned tasks' in navbar.
+ * A task can be assigned to multiple users, thus assignment relationship between user and task is many-to-many. User can see his/her tasks to do in his/her profile page.
+ * User can track time spent on a task in the form of timeblocks/intervals by either clicking start/stop or filling form manually, each assignment has its own tracked time.  
+ * Only manager/owner of a task can edit task detail and mark it as complete.
+ * Manager can see the time spent of all underlings's tasks, but cannot edit/delete time spent. Only user corresponding to an assignment can edit/delete time spent.
+ * User cannot see his/her partner's time spent on the same task
+ 
  
 ## Many to Many relation between users and tasks through assignments
 *       [User] <-> [Assignment] <-> [Task]

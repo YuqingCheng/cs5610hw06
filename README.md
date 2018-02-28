@@ -3,7 +3,7 @@
 ## Features & Design choices of App
  * Users register and log in by email
  * Only admin can assign manager to users, please log in as admin by 'admin@admin.com', and go to 'tasks2.yuqingc.com/users' to see all the users, manager can be assigned by editting user's profile.
- * Every user can create, thus owns a task, but can only assign it his/her underlings. A task can only be owned by one user, thus ownership between user and task is one-to-many. User can see his/her owned tasks by clicking 'owned tasks' in navbar.
+ * Every user can create, thus owns a task, but can only assign it to his/her underlings. A task can only be owned by one user, thus ownership relation between user and task is one-to-many. User can see his/her owned tasks by clicking 'owned tasks' in navbar.
  * A task can be assigned to multiple users, thus assignment relationship between user and task is many-to-many. User can see his/her tasks to do in his/her profile page.
  * User can track time spent on a task in the form of timeblocks/intervals by either clicking start/stop or filling form manually, each assignment has its own tracked time.  
  * Only manager/owner of a task can edit task detail and mark it as complete.

@@ -1,14 +1,15 @@
-<h2>New Timeblock</h2>
+<h2>Edit Timeblock</h2>
 
-<%= form_for @changeset, assignment_path(@conn, :create_timeblock), fn f -> %>
+<%= form_for @changeset, assignment_path(@conn, :update_timeblock), fn f -> %>
   <h3>From</h3>
   <%= datetime_select f, :start, class: "form-control" %>
 
   <h3>To</h3>
   <%= datetime_select f, :end, class: "form-control" %>
 
-  <%= hidden_input f, :assignment_id, value: @assignment_id %>
-  <%= submit "Add timeblock" %>
+  <%= hidden_input f, :assignment_id %>
+  <%= hidden_input f, :id %>
+  <%= submit "Update Timeblock" %>
 <% end %>
 
 <span><%= link "Back", to: assignment_path(@conn, :show, @assignment_id) %></span>

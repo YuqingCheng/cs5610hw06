@@ -36,10 +36,10 @@ defmodule TasktrackerWeb.AssignmentController do
     render(conn, "edit.html", assignment: assignment, task_id: task_id, changeset: changeset)
   end
 
-  def edit_timeblock(conn, %{"id" => id, "task_id" => task_id}) do
+  def edit_timeblock(conn, %{"id" => id, "assignment_id" => assignment_id}) do
     timeblock = Schedule.get_timeblock!(id)
     changeset = Schedule.change_timeblock(timeblock)
-    render(conn, "edit_timeblock.html", timeblock: timeblock, task_id: task_id, changeset: changeset)
+    render(conn, "edit_timeblock.html", timeblock: timeblock, assignment_id: assignment_id, changeset: changeset)
   end
 
   def create(conn, %{"assignment" => assignment}) do
@@ -54,7 +54,7 @@ defmodule TasktrackerWeb.AssignmentController do
   end
 
   def create_timeblock(conn, %{"timeblock" => timeblock}) do
-    case convert_to_timeblock(timeblock) |> Schedule.create_timeblock do
+    case timeblock |> Schedule.create_timeblock do
       {:ok, timeblock} ->
         conn
         |> put_flash(:info, "Timeblock created successfully.")
@@ -71,6 +71,25 @@ defmodule TasktrackerWeb.AssignmentController do
     %{assignment_id: a["assignment_id"], start: start, end: stop}
   end
 
+  def convert_to_flat(a) do
+    %{
+      from_year: a.start.year,
+      from_month: a.start.month,
+      from_day: a.start.day,
+      from_hour: a.start.hour,
+      from_minute: a.start.minute,
+      from_second: a.start.second,
+      to_year: a.end.year,
+      to_month: a.end.month,
+      to_day: a.end.day,
+      to_hour: a.end.hour,
+      to_minute: a.end.minute,
+      to_second: a.end.second,
+      assignment_id: a.assignment_id,
+      id: a.id
+    }
+  end
+
   def update(conn, %{"assignment" => assignment_params}) do
     assignment = Schedule.get_assignment!(assignment_params["id"])
     case Schedule.update_assignment(assignment, assignment_params) do
@@ -83,9 +102,8 @@ defmodule TasktrackerWeb.AssignmentController do
     end
   end
 
-  def update_timelock(conn, %{"timeblock" => timeblock_params}) do
+  def update_timeblock(conn, %{"timeblock" => timeblock_params}) do
     timeblock = Schedule.get_timeblock!(timeblock_params["id"])
-    timeblock_params = convert_to_timeblock(timeblock_params)
     case Schedule.update_timeblock(timeblock, timeblock_params) do
       {:ok, timeblock} ->
         conn

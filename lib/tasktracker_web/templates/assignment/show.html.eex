@@ -9,7 +9,7 @@
   <li>
     <%= timeblock.start |> NaiveDateTime.truncate :second %> ->
     <%= timeblock.end |> NaiveDateTime.truncate :second %>
-    <span><%= link "Edit", to: assignment_path(@conn, :edit_timeblock, timeblock) %></span>
+    <span><%= link "Edit", to: assignment_path(@conn, :edit_timeblock, timeblock, assignment_id: @assignment.id) %></span>
     <span><%= link "Delete", to: assignment_path(@conn, :delete_timeblock, timeblock), method: :delete, data: [confirm: "Are you sure?"] %></span>
   </li>
 <% end %>
